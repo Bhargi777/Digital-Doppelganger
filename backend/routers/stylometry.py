@@ -22,6 +22,12 @@ class GenerationRequest(BaseModel):
 async def analyze_style(input: TextSampleInput):
     """
     Analyzes the provided text sample and extracts stylistic features.
+
+    Args:
+        input (TextSampleInput): The text to be analyzed. Must be at least 50 characters long.
+
+    Returns:
+        StylometryMetrics: A dictionary containing various computed metrics and a confidence score.
     """
     if len(input.text) < 50:
         raise HTTPException(status_code=400, detail="Text sample too short. Please provide at least 50 characters.")
