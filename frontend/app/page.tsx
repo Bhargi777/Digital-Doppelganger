@@ -17,6 +17,7 @@ const DynamicTransparencyLayer = dynamic(() => import('@/components/Transparency
 export default function Home() {
   const [inputText, setInputText] = useState('');
   const [metrics, setMetrics] = useState<any>(null); // Using any for simplicity here
+  const [confidence, setConfidence] = useState<number | null>(null);
   const [loadingAnalyze, setLoadingAnalyze] = useState(false);
 
   const [prompt, setPrompt] = useState('');
@@ -30,6 +31,7 @@ export default function Home() {
     try {
       const result = await analyzeText(inputText);
       setMetrics(result.metrics);
+      setConfidence(result.confidence_score);
     } catch (error) {
       console.error(error);
       alert("Analysis failed. Please try a longer text sample.");
@@ -114,8 +116,14 @@ export default function Home() {
           </Card>
 
           <Card className="border-white/5 bg-card/60">
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <CardTitle>Key Metrics</CardTitle>
+              {confidence !== null && (
+                <div className="flex items-center gap-1.5 px-3 py-1 bg-green-500/10 text-green-400 text-xs font-bold rounded-full border border-green-500/20">
+                  <Shield className="h-3 w-3" />
+                  Profile Confidence: {(confidence * 100).toFixed(0)}%
+                </div>
+              )}
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justifies-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
