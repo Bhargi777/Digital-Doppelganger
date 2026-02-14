@@ -7,10 +7,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Loader2, Sparkles, Zap, Shield, BarChart3, Edit, ArrowRight } from 'lucide-react';
 import { StyleRadar } from '@/components/StyleRadar';
+import { TransparencyLayer } from '@/components/TransparencyLayer';
 import dynamic from 'next/dynamic';
 
 // Dynamic import for Recharts to avoid SSR hydration mismatch
 const DynamicStyleRadar = dynamic(() => import('@/components/StyleRadar').then(mod => mod.StyleRadar), { ssr: false });
+const DynamicTransparencyLayer = dynamic(() => import('@/components/TransparencyLayer').then(mod => mod.TransparencyLayer), { ssr: false });
 
 export default function Home() {
   const [inputText, setInputText] = useState('');
@@ -134,6 +136,13 @@ export default function Home() {
               </div>
             </CardContent>
           </Card>
+        </section>
+      )}
+
+      {/* Trait Explanations Section */}
+      {metrics && (
+        <section className="animate-in fade-in slide-in-from-bottom-5 duration-500 delay-100">
+          <DynamicTransparencyLayer metrics={metrics} />
         </section>
       )}
 
