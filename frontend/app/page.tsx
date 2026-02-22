@@ -125,7 +125,7 @@ export default function Home() {
               )}
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex justifies-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
+              <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
                 <span className="text-muted-foreground">Formality Score</span>
                 <span className="font-mono font-bold text-xl">{metrics.formality_score}/10</span>
               </div>
