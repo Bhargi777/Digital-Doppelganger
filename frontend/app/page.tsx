@@ -6,9 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Loader2, Sparkles, Zap, Shield, BarChart3, Edit, ArrowRight } from 'lucide-react';
-import { StyleRadar } from '@/components/StyleRadar';
-import { TransparencyLayer } from '@/components/TransparencyLayer';
 import dynamic from 'next/dynamic';
+import { GenerationResponse, StyleMetrics } from '@/lib/types';
 
 // Dynamic import for Recharts to avoid SSR hydration mismatch
 const DynamicStyleRadar = dynamic(() => import('@/components/StyleRadar').then(mod => mod.StyleRadar), { ssr: false });
@@ -16,13 +15,13 @@ const DynamicTransparencyLayer = dynamic(() => import('@/components/Transparency
 
 export default function Home() {
   const [inputText, setInputText] = useState('');
-  const [metrics, setMetrics] = useState<any>(null); // Using any for simplicity here
+  const [metrics, setMetrics] = useState<StyleMetrics | null>(null);
   const [confidence, setConfidence] = useState<number | null>(null);
   const [loadingAnalyze, setLoadingAnalyze] = useState(false);
 
   const [prompt, setPrompt] = useState('');
   const [contextType, setContextType] = useState('email');
-  const [generation, setGeneration] = useState<any>(null);
+  const [generation, setGeneration] = useState<GenerationResponse | null>(null);
   const [loadingGenerate, setLoadingGenerate] = useState(false);
 
   const handleAnalyze = async () => {

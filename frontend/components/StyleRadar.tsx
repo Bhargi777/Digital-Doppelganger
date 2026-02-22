@@ -1,9 +1,9 @@
 "use client";
 
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
-import { StylometryMetrics } from '@/lib/types';
+import { StyleMetrics } from '@/lib/types';
 
-export function StyleRadar({ data }: { data: StylometryMetrics['metrics'] }) {
+export function StyleRadar({ data }: { data: StyleMetrics }) {
     const chartData = [
         { subject: 'Formality', A: (data.formality_score / 10) * 100, fullMark: 100 },
         { subject: 'Diversity', A: data.lexical_diversity * 100, fullMark: 100 },

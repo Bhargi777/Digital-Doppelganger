@@ -1,6 +1,8 @@
+import { GenerationRequest, GenerationResponse, StylometryMetrics } from "@/lib/types";
+
 const BASE_URL = "http://localhost:8000/stylometry";
 
-export async function analyzeText(text: string) {
+export async function analyzeText(text: string): Promise<StylometryMetrics> {
     const response = await fetch(`${BASE_URL}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -11,10 +13,14 @@ export async function analyzeText(text: string) {
         throw new Error("Failed to analyze text");
     }
 
-    return response.json();
+    return response.json() as Promise<StylometryMetrics>;
 }
 
-export async function generateDraft(prompt: string, metrics: any, contextType: string = "email") {
+export async function generateDraft(
+    prompt: string,
+    metrics: GenerationRequest["style_metrics"],
+    contextType: string = "email"
+): Promise<GenerationResponse> {
     const response = await fetch(`${BASE_URL}/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -29,5 +35,5 @@ export async function generateDraft(prompt: string, metrics: any, contextType: s
         throw new Error("Failed to generate draft");
     }
 
-    return response.json();
+    return response.json() as Promise<GenerationResponse>;
 }

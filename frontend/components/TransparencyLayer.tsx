@@ -1,5 +1,6 @@
 import { Info } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { StyleMetrics } from "@/lib/types";
 
 interface TraitExplanation {
     trait: string;
@@ -7,9 +8,9 @@ interface TraitExplanation {
     value: string | number;
 }
 
-export function TransparencyLayer({ metrics }: { metrics: any }) {
-    const getTraits = (metrics: any): TraitExplanation[] => {
-        const traits = [];
+export function TransparencyLayer({ metrics }: { metrics: StyleMetrics }) {
+    const getTraits = (metrics: StyleMetrics): TraitExplanation[] => {
+        const traits: TraitExplanation[] = [];
 
         if (metrics.formality_score > 7) {
             traits.push({ trait: "Corporate/Formal", explanation: "Your writing uses sophisticated vocabulary and a structured tone common in professional settings.", value: `${metrics.formality_score}/10` });
