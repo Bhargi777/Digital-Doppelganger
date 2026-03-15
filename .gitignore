@@ -12,4 +12,6 @@ node_modules/
 .next/
 dist/
 build/
-*.egg-info/
+*.egg-info/*.log
+*.pid
+.pytest_cache/
